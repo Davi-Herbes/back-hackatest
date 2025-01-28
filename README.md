@@ -1,1 +1,1 @@
-# BACKEND BASE
+# Backend do teste para a hackathon
