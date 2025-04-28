@@ -1,19 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from "@nestjs/common";
+import {
+	Controller,
+	Get,
+	Post,
+	Body,
+	Patch,
+	Param,
+	Delete,
+	Req,
+	Res,
+	HttpCode,
+} from "@nestjs/common";
 import { UsersService } from "./users.service";
-import { CreateUserDto } from "./dto/create_user.dto";
 import { UpdateUserDto } from "./dto/update_user.dto";
-import { MultipartFile } from "@fastify/multipart";
-import { FastifyRequest } from "fastify";
-import { ImagesProvider } from "src/providers/images/images.provider";
+import { FastifyReply, FastifyRequest } from "fastify";
 
 @Controller("users")
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
-
-	@Post()
-	create(@Body() createUserDto: CreateUserDto) {
-		return this.usersService.create(createUserDto);
-	}
 
 	@Get()
 	findAll() {
@@ -35,12 +38,8 @@ export class UsersController {
 		return this.usersService.remove(id);
 	}
 
-	@Post("/images")
-	async image(@Req() req: FastifyRequest) {
-		const file = await req.file();
-		const images = new ImagesProvider();
-		if (file) {
-			return images.upload(file);
-		}
+	@Delete("all")
+	removeAll() {
+		return this.usersService.removeAll();
 	}
 }

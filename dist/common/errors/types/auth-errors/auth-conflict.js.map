@@ -1,0 +1,1 @@
+{"version":3,"file":"auth-conflict.js","sourceRoot":"","sources":["../../../../../src/common/errors/types/auth-errors/auth-conflict.ts"],"names":[],"mappings":";;;AAAA,6CAAyC;AAEzC,MAAa,iBAAkB,SAAQ,sBAAS;IAC/C,YAAY,OAAgB;QAC3B,KAAK,CAAC,OAAO,CAAC,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,kCAAkC,EAAE,UAAU,CAAC,CAAC;IAC3E,CAAC;CACD;AAJD,8CAIC"}

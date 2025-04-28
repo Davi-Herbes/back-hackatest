@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Olá, ${username}</h1>
+  <br /><span>Clique abaixo para confirmar conta:</span><br />
+  <form id="form"><button>Confirmar</button></form>
+</div>
+<script>
+  const form = document.getElementById("form");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    alert("PÁ");
+    const link = document.createElement("a");
+    link.href = "http://localhost:3000";
+    link.click();
+  });
+</script>

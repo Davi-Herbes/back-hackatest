@@ -1,0 +1,1 @@
+{"version":3,"file":"f-key-error.js","sourceRoot":"","sources":["../../../../../src/common/errors/types/database-errors/f-key-error.ts"],"names":[],"mappings":";;;AACA,uDAAkD;AAElD,MAAa,SAAU,SAAQ,+BAAa;IAE1C,YAAY,CAAuC;QACjD,MAAM,KAAK,GAAG,CAAC,CAAC,IAAI,CAAC,UAAU,CAAC;QAEhC,KAAK,CAAC,0BAA0B,KAAK,gBAAgB,CAAC,CAAC;QACvD,IAAI,CAAC,KAAK,GAAG,KAAe,CAAC;IAC/B,CAAC;CACF;AARD,8BAQC"}

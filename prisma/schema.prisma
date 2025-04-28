@@ -15,11 +15,19 @@ model User {
   username     String
   passwordHash String @map("password_hash")
 
-  createdAt  DateTime      @default(now()) @map("created_at")
-  updatedAt  DateTime      @updatedAt @map("updated_at")
-  UserImages UsersImages[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  usersImages UsersImages?
 
   @@map("users")
+}
+
+model UserConfirmationCode {
+  id        String   @id @default(uuid())
+  code      String
+  email     String
+  createdAt DateTime @default(now()) @map("created_at")
 }
 
 model UsersImages {
@@ -32,9 +40,8 @@ model UsersImages {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // o onDelete fará com que quando o User for deletado ele também deletará as suas imagens
-  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  ownerId String @map("owner_id")
+  owner   User   @relation(fields: [ownerId], references: [id])
+  ownerId String @unique @map("owner_id")
 
   @@map("users_images")
 }

@@ -14,6 +14,7 @@ import { UnauthorizedInterceptor } from "./common/errors/interceptors/unauthoriz
 import { ImageProviderInterceptor } from "./common/errors/interceptors/image-provider.interceptor";
 import { ConflictInterceptor } from "./common/errors/interceptors/conflict.interceptor";
 import { DatabaseInterceptor } from "./common/errors/interceptors/database.interceptor";
+import { AuthInterceptor } from "./common/errors/interceptors/auth.interceptor";
 
 // const whiteList = process.env.WHITE_LIST.split(",");
 // const corsOptions: CorsOptions = {
@@ -45,6 +46,8 @@ async function bootstrap() {
 		secret: process.env.COOKIE_SECRET,
 		parseOptions: {
 			httpOnly: true,
+			sameSite: "lax",
+			secure: false, // Só quando tiver usando https
 			expires: expiresDate,
 			maxAge: 60 * 60 * 24,
 			path: "/",
@@ -60,6 +63,7 @@ async function bootstrap() {
 	);
 
 	app.useGlobalInterceptors(
+		new AuthInterceptor(),
 		new NotFoundInterceptor(),
 		new UnauthorizedInterceptor(),
 		new ImageProviderInterceptor(),
@@ -67,6 +71,6 @@ async function bootstrap() {
 		new DatabaseInterceptor(),
 	);
 
-	await app.listen(3000);
+	await app.listen(process.env.PORT);
 }
 bootstrap();

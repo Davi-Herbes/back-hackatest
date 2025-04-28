@@ -1,20 +1,22 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { CreateUserDto } from "./dto/create_user.dto";
+import { RegisterUserDto } from "../auth/dto/register_user.dto";
 import { UpdateUserDto } from "./dto/update_user.dto";
 import { UsersRepository } from "./repositories/users.repository";
 import { CreateUserData } from "./interfaces/create_user.data";
 import { compare, hash } from "bcryptjs";
 import { UsersResponse } from "./interfaces/users.response";
+import { MailService } from "src/providers/emails/mail.service";
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class UsersService {
-	constructor(private repo: UsersRepository) {}
-	async create({ username, email, password }: CreateUserDto): Promise<UsersResponse> {
-		const passwordHash = await hash(password, 8);
-
+	constructor(
+		private repo: UsersRepository,
+		private jwtService: JwtService,
+	) {}
+	async create({ username, email, passwordHash }: CreateUserData): Promise<UsersResponse> {
 		return this.repo.create({ username, role: "student", email, passwordHash });
 	}
-
 	findAll(): Promise<UsersResponse[]> {
 		return this.repo.findAll();
 	}
@@ -24,7 +26,7 @@ export class UsersService {
 	}
 
 	findOneByEmail(email: string): Promise<UsersResponse> {
-		return this.repo.findOneByEmail(email);
+		return this.repo.findOneByEmail(email, true);
 	}
 
 	async update(id: string, updateUserDto: UpdateUserDto): Promise<UsersResponse> {
@@ -45,5 +47,8 @@ export class UsersService {
 
 	remove(id: string): Promise<UsersResponse> {
 		return this.repo.remove(id);
+	}
+	removeAll() {
+		return this.repo.removeAll();
 	}
 }

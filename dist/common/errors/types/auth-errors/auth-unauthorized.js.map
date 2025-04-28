@@ -1,0 +1,1 @@
+{"version":3,"file":"auth-unauthorized.js","sourceRoot":"","sources":["../../../../../src/common/errors/types/auth-errors/auth-unauthorized.ts"],"names":[],"mappings":";;;AAAA,6CAAyC;AAEzC,MAAa,qBAAsB,SAAQ,sBAAS;IACnD,YAAY,OAAgB;QAC3B,KAAK,CAAC,OAAO,CAAC,CAAC,CAAC,OAAO,CAAC,CAAC,CAAC,iBAAiB,EAAE,cAAc,CAAC,CAAC;IAC9D,CAAC;CACD;AAJD,sDAIC"}

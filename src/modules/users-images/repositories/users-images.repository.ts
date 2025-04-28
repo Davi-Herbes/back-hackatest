@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/providers/prisma/prisma.service";
 import { CreateImageData } from "../interfaces/create_image.data";
-import { UpdateImageData } from "../interfaces/update_image.data";
 import { UsersImagesResponse } from "../interfaces/users_images.response";
 
 @Injectable()

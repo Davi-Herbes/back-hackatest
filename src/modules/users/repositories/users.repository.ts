@@ -17,11 +17,13 @@ export class UsersRepository {
 	}
 
 	findOne(id: string): Promise<UsersResponse> {
-		return this.prisma.user.findUniqueOrThrow({ where: { id } });
+		return this.prisma.user.findUniqueOrThrow({ where: { id }, include: { usersImages: true } });
 	}
 
-	findOneByEmail(email: string): Promise<UsersResponse> {
-		return this.prisma.user.findUniqueOrThrow({ where: { email } });
+	findOneByEmail(email: string, withoutError?: boolean): Promise<UsersResponse> {
+		return withoutError
+			? this.prisma.user.findUnique({ where: { email }, include: { usersImages: true } })
+			: this.prisma.user.findUniqueOrThrow({ where: { email }, include: { usersImages: true } });
 	}
 
 	update(id: string, updateUserData: UpdateUserData): Promise<UsersResponse> {
@@ -30,5 +32,9 @@ export class UsersRepository {
 
 	remove(id: string): Promise<UsersResponse> {
 		return this.prisma.user.delete({ where: { id } });
+	}
+
+	removeAll() {
+		return this.prisma.user.deleteMany();
 	}
 }
