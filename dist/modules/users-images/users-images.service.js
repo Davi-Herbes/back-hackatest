@@ -19,6 +19,14 @@ let UsersImagesService = class UsersImagesService {
         this.imagesProvider = imagesProvider;
     }
     async create(file, ownerId) {
+        const stockedImage = await this.repo.findOneByOwnerId(ownerId);
+        if (stockedImage !== null) {
+            this.imagesProvider.delete(stockedImage.publicId);
+            await this.repo.remove(stockedImage.id);
+        }
+        return this.uploadAndCreate(file, ownerId);
+    }
+    async uploadAndCreate(file, ownerId) {
         const data = await this.imagesProvider.upload(file);
         return this.repo.create({ ownerId, ...data });
     }

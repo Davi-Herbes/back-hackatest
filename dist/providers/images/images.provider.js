@@ -22,8 +22,8 @@ let ImagesProvider = class ImagesProvider {
                     reject(error);
                 }
                 else {
-                    const { format, originalFilename, publicId, url } = result;
-                    resolve({ format, originalFilename, publicId, url });
+                    const { format, original_filename, public_id, url } = result;
+                    resolve({ format, originalFilename: original_filename, publicId: public_id, url });
                 }
             });
             file.file.pipe(stream);

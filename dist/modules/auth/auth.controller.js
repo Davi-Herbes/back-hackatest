@@ -31,12 +31,13 @@ let AuthController = class AuthController {
     async signIn({ email, password }, res) {
         const access_token = await this.authService.signIn(email, password);
         res.setCookie("access_token", access_token);
-        const { role, username, images } = await this.usersService.findOneByEmail(email);
-        return { message: "Usuário logado.", userData: { email, role, username, image: images } };
+        const { role, username, usersImages } = await this.usersService.findOneByEmail(email);
+        return { message: "Usuário logado.", userData: { email, role, username, image: usersImages } };
     }
     async getProfile(req) {
-        const { email, role, username, images } = await this.usersService.findOne(req.user.sub);
-        return { message: "Success", userData: { email, role, username, image: images } };
+        const { sub } = req.user;
+        const { email, role, username, usersImages } = await this.usersService.findOne(sub);
+        return { message: "Success", userData: { email, role, username, image: usersImages } };
     }
     async register(registerUserDto, res) {
         const token = await this.authService.requestRegister(registerUserDto);

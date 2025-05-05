@@ -7,6 +7,7 @@ export declare class UsersImagesService {
     private imagesProvider;
     constructor(repo: UsersImagesRepository, imagesProvider: ImagesProvider);
     create(file: MultipartFile, ownerId: string): Promise<UsersImagesResponse>;
+    uploadAndCreate(file: MultipartFile, ownerId: string): Promise<UsersImagesResponse>;
     findAll(): Promise<UsersImagesResponse[]>;
     findOne(id: string): Promise<UsersImagesResponse>;
     remove(id: string): Promise<UsersImagesResponse>;

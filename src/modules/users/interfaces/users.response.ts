@@ -2,5 +2,5 @@ import { UsersImageEntity } from "src/modules/users-images/entities/users_image.
 import { UserEntity } from "../entities/user.entity";
 
 export interface UsersResponse extends UserEntity {
-	images?: UsersImageEntity;
+	usersImages?: UsersImageEntity;
 }

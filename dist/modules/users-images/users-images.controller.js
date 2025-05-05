@@ -23,6 +23,7 @@ let UsersImagesController = class UsersImagesController {
     async create(req) {
         const file = await req.file();
         const { sub } = req.user;
+        console.log(req.user);
         return this.usersImagesService.create(file, sub);
     }
     findAll() {

@@ -57,12 +57,13 @@ export class AuthService {
 	}
 
 	async confirm(createUserData: CreateUserData) {
-		const { id, email, username, role, images } = await this.usersService.create(createUserData);
+		const { id, email, username, role, usersImages } =
+			await this.usersService.create(createUserData);
 
 		const payload = { sub: id, email };
 
 		const access_token = await this.jwtService.signAsync(payload);
 
-		return { access_token, userData: { email, username, role, image: images } };
+		return { access_token, userData: { email, username, role, image: usersImages } };
 	}
 }

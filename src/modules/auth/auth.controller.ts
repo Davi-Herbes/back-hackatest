@@ -41,17 +41,18 @@ export class AuthController {
 
 		res.setCookie("access_token", access_token);
 
-		const { role, username, images } = await this.usersService.findOneByEmail(email);
+		const { role, username, usersImages } = await this.usersService.findOneByEmail(email);
 
-		return { message: "Usuário logado.", userData: { email, role, username, image: images } };
+		return { message: "Usuário logado.", userData: { email, role, username, image: usersImages } };
 	}
 
 	@UseGuards(AuthGuard)
 	@Get("profile")
 	async getProfile(@Req() req: AuthRequest) {
-		const { email, role, username, images } = await this.usersService.findOne(req.user.sub);
+		const { sub } = req.user;
+		const { email, role, username, usersImages } = await this.usersService.findOne(sub);
 
-		return { message: "Success", userData: { email, role, username, image: images } };
+		return { message: "Success", userData: { email, role, username, image: usersImages } };
 	}
 
 	@Post("register")

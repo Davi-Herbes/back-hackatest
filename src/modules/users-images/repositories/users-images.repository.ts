@@ -15,6 +15,10 @@ export class UsersImagesRepository {
 		return this.prisma.usersImages.findMany({ include: { owner: true } });
 	}
 
+	findOneByOwnerId(id: string) {
+		return this.prisma.usersImages.findUnique({ where: { ownerId: id } });
+	}
+
 	findOne(id: string): Promise<UsersImagesResponse> {
 		return this.prisma.usersImages.findUniqueOrThrow({ where: { id }, include: { owner: true } });
 	}

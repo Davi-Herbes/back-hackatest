@@ -22,6 +22,9 @@ let UsersImagesRepository = class UsersImagesRepository {
     findAll() {
         return this.prisma.usersImages.findMany({ include: { owner: true } });
     }
+    findOneByOwnerId(id) {
+        return this.prisma.usersImages.findUnique({ where: { ownerId: id } });
+    }
     findOne(id) {
         return this.prisma.usersImages.findUniqueOrThrow({ where: { id }, include: { owner: true } });
     }
